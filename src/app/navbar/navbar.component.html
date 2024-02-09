@@ -1,6 +1,6 @@
 <div class="navbar">
     @for (category of categories; track $index) {
-      <div>{{ getCategory(category) }}</div>
+      <div (click)="getProductsByCategory(category)">{{ getCategory(category) }}</div>
     }
    
   </div>

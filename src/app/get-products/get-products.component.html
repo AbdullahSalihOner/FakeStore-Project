@@ -11,6 +11,7 @@
           <p class="card-description">{{ product.description }}</p>
   
           <button mat-button (click)="openDialog(product)">View Details</button>
+          <button mat-button (click)="deleteProduct(product,product.id)">Delete</button>
         </div>
       </div>
     }

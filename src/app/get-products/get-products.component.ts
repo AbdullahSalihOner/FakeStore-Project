@@ -15,8 +15,9 @@ export class GetProductsComponent {
   // we declare the products variable here to store the data we get from the server
   products : ProductModel[] | any = [];
 
-  productUrl = 'https://fakestoreapi.com/products';
+  productUrl = 'https://fakestoreapi.com/products/';
 
+  
   // we use the HttpClient module to make a request to the server
   constructor(private http: HttpClient, public dialog:MatDialog) { 
     this.getProducts();
@@ -36,6 +37,37 @@ export class GetProductsComponent {
     })
   }
 
+ //Silme işlemi için kullanılacak fonksiyon
+  deleteProduct(product:ProductModel, id:number){
+
+    // Silme işlemi başarılıysa, ürünü listeden kaldırıyoruz
+   this.products = this.products.filter((product:ProductModel) => product.id !== id);
+    // Silme işlemi içinAPI'ye DELETE isteği gönderiyoruz
+    this.http.delete(this.productUrl+`${id}`)
+    .subscribe((response) => {
+      console.log('Product deleted successfully:', response);
+      // Silme işlemi başarılıysa istediğiniz işlemler
+    }, (error) => {
+      console.error('Error deleting product:', error);
+      // Silme işlemi sırasında bir hata oluştuysa burada gerekli işlemler
+    });
+  }
+
+   // Kategoriye göre ürünleri filtreleme metodu
+   productFilterByCategory(category: string): void {
+    if (category) {
+      this.http.get(`${this.productUrl}/category/${category}`).subscribe(response => {
+        this.products = response;
+      });
+    } else {
+      // Eğer kategori boşsa, tüm ürünleri getir
+      this.getProducts();
+    }
+  }
+
+
+
+  //Ekleme butonuna tıklandığında çalışacak fonksiyon
   openProductAddDialog(): void {
     const dialogRef = this.dialog.open(ProductAddComponent, {
       width: '400px',
@@ -51,6 +83,9 @@ export class GetProductsComponent {
       }
     });
   }
+
+
+  
 
 }
 
