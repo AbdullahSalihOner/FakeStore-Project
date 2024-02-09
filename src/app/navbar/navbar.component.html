@@ -1,1 +1,7 @@
-<p>navbar works!</p>
+<div class="navbar">
+    @for (category of categories; track $index) {
+      <div>{{ getCategory(category) }}</div>
+    }
+   
+  </div>
+    
