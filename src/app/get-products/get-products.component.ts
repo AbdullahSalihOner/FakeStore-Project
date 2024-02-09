@@ -2,6 +2,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ProductDetailComponent } from '../product-detail/product-detail.component';
+import { ProductAddComponent } from '../product-add/product-add.component';
 
 @Component({
   selector: 'app-get-products',
@@ -33,6 +34,22 @@ export class GetProductsComponent {
       disableClose: true, // we disable the close button,
       autoFocus: true, // we set the focus to the dialog
     })
+  }
+
+  openProductAddDialog(): void {
+    const dialogRef = this.dialog.open(ProductAddComponent, {
+      width: '400px',
+      data: {} // İlgili başlangıç verilerini buraya ekleyebilirsiniz.
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log('Product added:', result);
+        // Burada API'ye POST isteği yapabilirsiniz.
+      } else {
+        console.log('Product addition cancelled');
+      }
+    });
   }
 
 }

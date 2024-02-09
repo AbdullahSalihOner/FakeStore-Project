@@ -1,0 +1,27 @@
+<h2 mat-dialog-title>Add Product</h2>
+<div mat-dialog-content>
+  <div>
+    <label>Title:</label>
+    <input [(ngModel)]="product.title" placeholder="Product Title">
+  </div>
+  <div>
+    <label>Price:</label>
+    <input [(ngModel)]="product.price" placeholder="Product Price">
+  </div>
+  <div>
+    <label>Description:</label>
+    <textarea [(ngModel)]="product.description" placeholder="Product Description"></textarea>
+  </div>
+  <div>
+    <label>Image URL:</label>
+    <input [(ngModel)]="product.image" placeholder="Product Image URL">
+  </div>
+  <div>
+    <label>Category:</label>
+    <input [(ngModel)]="product.category" placeholder="Product Category">
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancelClick()">Cancel</button>
+  <button mat-button (click)="onAddClick()">Add</button>
+</div>
